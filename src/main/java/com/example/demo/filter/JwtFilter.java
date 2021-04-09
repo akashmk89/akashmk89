@@ -16,12 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-//important la
-
-// branch 1 commit
-
-//changes added
-
 @Component
 
 public class JwtFilter extends OncePerRequestFilter {
