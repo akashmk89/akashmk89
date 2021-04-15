@@ -20,12 +20,18 @@ import java.util.Set;
 
 @Entity
 @Table(name="Department")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Department {
 
+    public Department(String name, String code, String color){
+        this.name = name;
+        this.code = code;
+        this.color = color;
+    };
 @Id
 @GeneratedValue()
 int id;
@@ -41,6 +47,6 @@ public User hod;
 
 @OneToMany(targetEntity = User.class, cascade = CascadeType.ALL)
 @JoinColumn(name = "departmentId", referencedColumnName = "id")
-@JsonIgnore
-public List<User> departmentMembers;
+//@JsonIgnore
+public Set<User> departmentMembers;
 }

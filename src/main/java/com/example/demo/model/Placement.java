@@ -1,16 +1,14 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "placement")
 @Builder
@@ -29,21 +27,12 @@ public class Placement {
     @JoinColumn(name="departmentId", nullable=false)
     @JsonIgnore
     public Department department;
-
     private Double salary;
-
-//    @Temporal(value = TemporalType.DATE)
-     private LocalDate placementDate;
-//    private Date placementDate;
-
+    private LocalDate placementDate;
     private Long phoneNumber;
-
     private String email;
-
     private  String companyName;
-
     private String designation;
-
     @Lob
     private byte[] photo;
 }

@@ -20,6 +20,7 @@ public class PlacementController {
     DepartmentService departmentService;
     @Autowired
     PlacementRepository placementRepository;
+
     @PostMapping("/upload")
     public ResponseEntity AddPlacement(@RequestParam("file") MultipartFile file) throws IOException, ResourceNotFoundException {
         byte[] image = file.getBytes();
@@ -28,8 +29,14 @@ public class PlacementController {
     @GetMapping("/get")
     public ResponseEntity GetPlacements() {
            return new ResponseEntity<>(placementRepository.findAll(),HttpStatus.OK);
-//        byte[] image = file.getBytes();
-//        return new ResponseEntity<>(placementService.addPlacement(image), HttpStatus.OK);
+    }
+    @PutMapping
+    public ResponseEntity UpdatePlacement(){
+        return new ResponseEntity<>(placementRepository.findAll(), HttpStatus.OK);
+    }
+    @DeleteMapping("/delete")
+    void deleteEmployee(@RequestParam("id") Integer id) throws ResourceNotFoundException {
+        departmentService.deleteDepartment(id);
     }
 
 }

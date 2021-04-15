@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletResponse;
 import com.example.demo.Utils.DTOs.GetAllForDropDownDTO;
 import com.example.demo.Utils.SearchCriteria.DepartmentPage;
@@ -39,10 +40,16 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
 
+	@GetMapping("/test-streams")
+	public List<Department> playWithStreams(){
+		return departmentService.getDepartmentsForTest();
+	}
+
 //	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/get")
 	public List<DepartmentAddEditDTO> getAllDepartment() throws  InterruptedException{
-		return departmentService.getAllDepartment();
+		List<DepartmentAddEditDTO> departmentAddEditDTOList = departmentService.getAllDepartment();
+		return departmentAddEditDTOList;
 	}
 	@GetMapping("/get-paginated and search")
 	public ResponseEntity<Page<Department>> getDepartmentsWithSearchAndPagination(DepartmentPage departmentPage, DepartmentSearchCriteria departmentSearchCriteria){
@@ -60,11 +67,13 @@ public class DepartmentController {
 			@RequestParam(defaultValue = "0") Integer pageNo, 
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "id") String sortBy){
-		return departmentService.getDepartmentsWithPagination(pageNo, pageSize, sortBy);
+
+		List<DepartmentAddEditDTO> departmentsList = departmentService.getDepartmentsWithPagination(pageNo, pageSize, sortBy);
+	return  departmentsList;
 	}
 	
 	@GetMapping("/{id}/users")
-	public ResponseEntity<List<User>> getUsersOfDepartment(@PathVariable("id") Integer id) throws ResourceNotFoundException{
+	public ResponseEntity<Set<User>> getUsersOfDepartment(@PathVariable("id") Integer id) throws ResourceNotFoundException{
 		return departmentService.getAllUsersOfDepartment(id);
 	}
 

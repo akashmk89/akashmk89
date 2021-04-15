@@ -12,8 +12,12 @@ import com.example.demo.Utils.enums.LeaveTypes;
 
 import com.sun.istack.Nullable;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 //import com.example.demo.Utils.enums;
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="Leave_Master")
 public class LeaveMaster {
